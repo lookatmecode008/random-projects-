@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en-ZA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#172b3a" />
+    <meta
+      name="description"
+      content="A simple, offline-first attendance kiosk interface."
+    />
+    <title>Attendance Register</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand" aria-label="Attendance Register">
+          <div class="brand-mark" aria-hidden="true">
+            <img src="Logo Zoom.jpeg" alt="Are Aganeng Logo" />
+          </div>
+          <div class="brand-copy">
+            <span class="brand-name">Are Aganeng NPO</span>
+            <span class="brand-subtitle">STAFF REGISTER</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <section class="welcome-section" aria-labelledby="page-title">
+          <h1 id="page-title">Mark your attendance.</h1>
+          <p class="intro">
+            Enter your employee ID to find your record and see the available
+            action.
+          </p>
+        </section>
+
+        <section
+          class="panel employee-panel"
+          aria-labelledby="employee-heading"
+        >
+          <div class="panel-heading">
+            <div>
+              <h2 id="employee-heading">Identify yourself</h2>
+            </div>
+          </div>
+
+          <form class="employee-form" action="#" method="get">
+            <label for="employee-id">Employee ID</label>
+            <div class="input-row">
+              <input
+                id="employee-id"
+                name="employee-id"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                autocapitalize="off"
+                spellcheck="false"
+                placeholder="Enter ID exactly as provided by the organisation"
+                aria-describedby="id-help"
+              />
+              <button
+                id="find-record"
+                class="button button-primary"
+                type="button"
+                onclick="findRecord()"
+              >
+                Find record!
+              </button>
+            </div>
+          </form>
+
+          <div class="identity-preview" aria-live="polite">
+            <div class="avatar-placeholder" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle
+                  cx="12"
+                  cy="8"
+                  r="3.25"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                />
+                <path
+                  d="M5.5 20c.45-3.45 2.8-5.25 6.5-5.25s6.05 1.8 6.5 5.25"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </div>
+            <div class="identity-copy">
+              <p class="state-title">Waiting for employee ID...</p>
+              <p class="identity-name"></p>
+              <p class="identity-message"></p>
+            </div>
+          </div>
+          <div class="action-buttons">
+            <button
+              id="clock-in"
+              class="clockingButtons button button-clock-in"
+              type="button"
+              onclick="clockIn()"
+              disabled
+            >
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 15V3m0 0L7.5 7.5M12 3l4.5 4.5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M5 13.5v5A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5v-5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                />
+              </svg>
+              Clock in
+            </button>
+            <button
+              id="clock-out"
+              class="clockingButtons button button-clock-out"
+              type="button"
+              disabled
+            >
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 9V21m0 0l4.5-4.5M12 21l-4.5-4.5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M5 10.5v-5A2.5 2.5 0 0 1 7.5 3h9A2.5 2.5 0 0 1 19 5.5v5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                />
+              </svg>
+              Clock out
+            </button>
+          </div>
+          <div class="attendance-state">
+            <span class="state-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="8.25"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                />
+                <path
+                  d="M12 7.5v4.8l3.1 1.8"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+            <div>
+              <p class="state-description">
+                Your clock-in or clock-out option will appear here after your
+                record is found.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel action-panel" aria-labelledby="action-heading">
+          <div class="panel-heading">
+            <div>
+              <h2 id="action-heading">Record Management</h2>
+            </div>
+          </div>
+          <div id="recordManagement" class="panel">
+            <a href="Records.html" target="_blank">
+              <div id="registryButton" class="button button-primary">
+                Attendance Registry
+              </div></a
+            >
+          </div>
+        </section>
+
+        <aside class="privacy-note" aria-label="Privacy reminder">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+            <!--!Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+            <path
+              d="M541.4 162.6C549 155 561.7 156.9 565.5 166.9C572.3 184.6 576 203.9 576 224C576 312.4 504.4 384 416 384C398.5 384 381.6 381.2 365.8 376L178.9 562.9C150.8 591 105.2 591 77.1 562.9C49 534.8 49 489.2 77.1 461.1L264 274.2C258.8 258.4 256 241.6 256 224C256 135.6 327.6 64 416 64C436.1 64 455.4 67.7 473.1 74.5C483.1 78.3 484.9 91 477.4 98.6L388.7 187.3C385.7 190.3 384 194.4 384 198.6L384 240C384 248.8 391.2 256 400 256L441.4 256C445.6 256 449.7 254.3 452.7 251.3L541.4 162.6z"
+            />
+          </svg>
+          <p>
+            <strong>Contact Aaron for any challenges experienced.</strong> Check
+            that the displayed name is yours before recording attendance. Never
+            enter attendance for another employee.
+          </p>
+        </aside>
+      </main>
+
+      <footer class="app-footer">
+        <span>Attendance Register</span>
+        <span>Local-first design preview</span>
+      </footer>
+    </div>
+    <script src="scripts.js"></script>
+  </body>
+</html>

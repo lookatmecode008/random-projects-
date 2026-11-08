@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Records</title>
+  </head>
+  <body>
+    <h1>AANPO Attendance Records</h1>
+
+    <h2>Date: <span id="today"></span></h2>
+    <table>
+      <thead>
+        <tr width="100vw">
+          <td>Name</td>
+          <td>Department</td>
+          <td>ID</td>
+          <td>Clock In</td>
+          <td>Clock Out</td>
+        </tr>
+      </thead>
+      <tbody id="insertEntry"></tbody>
+      <button class="button" onclick="showTime()">Test Stuff</button>
+    </table>
+
+    <script>
+  const container = document.querySelector("#insertEntry");
+  const attendanceData = JSON.parse(localStorage.getItem("attendanceRegister")) || [];
+  const todayDate = new Date().toISOString().split('T')[0];
+  
+  document.getElementById("today").innerText = todayDate;
+
+  // Clear container
+  container.innerHTML = "";
+
+  // This is where you use textContent to dictate what element goes where
+  attendanceData.forEach((emp) => {
+    const row = document.createElement("tr");
+
+    const nameTd = document.createElement("td");
+    nameTd.textContent = `${emp.name} ${emp.surname}`;
+
+    const deptTd = document.createElement("td");
+    deptTd.textContent = emp.department;
+
+    const idTd = document.createElement("td");
+    idTd.textContent = emp.id;
+
+    const inTd = document.createElement("td");
+    inTd.textContent = emp.clockIn;
+
+    const outTd = document.createElement("td");
+    outTd.textContent = emp.clockOut || "—";
+
+    row.append(nameTd, deptTd, idTd, inTd, outTd);
+    container.appendChild(row);
+  });
+</script>
+  </body>
+</html>
