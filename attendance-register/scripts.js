@@ -10,13 +10,6 @@ let employeeDatabase = [];
 // this app waits for this fucntion run completely before continuing since the CSV mcut load before attendance can be checked.
 // we have to wait for the file to be fetched completely first, then wait for its content to be read as text in order for it to be useable. 
 
-//findRecord() can now access the database but naming cnventions have chnaged so some values are inaccessible
-//clockIn button is diabled, logic needs to be evaluated and adjusted
-// maybe its a logic issue, maybe a timing problem where clockIn judges before findRecord(), maybe the key-value pairs fucked up the clockIn logic
-//watch out for name conveentions, all key and values are written in sentence case
-//entries are now recorded twice in the attendance registry for some reason 
-//clockOut logic is out the window
-
 fetch("./listOfEmployees.csv")
   .then(response => response.text())
   .then((data) => {
