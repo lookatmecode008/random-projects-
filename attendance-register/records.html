@@ -1,35 +1,44 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" id="register-body">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
     <title>Records</title>
   </head>
-  <body>
-    <h1>AANPO Attendance Records</h1>
+  
+  <body class="app-shell">
+      <header class="topbar records-header">
+     
+            <img src="./Logo Zoom.jpeg"/>
+            <div class="brand-copy">
+              <span class="brand-name">Are Aganeng NPO</span>
+              <span class="brand-subtitle">STAFF REGISTER</span>
+            </div>
+          
+      </header>
 
-    <h2>Date: <span id="today"></span></h2>
+    <h2>Today: <span id="today"></span></h2>
     <table>
       <thead>
-        <tr width="100vw">
+        <tr>
           <td>Name</td>
           <td>Department</td>
-          <td>ID</td>
           <td>Clock In</td>
           <td>Clock Out</td>
         </tr>
       </thead>
       <tbody id="insertEntry"></tbody>
-      <button class="button" onclick="exportData()">Download Attendance Record</button>
-      <button class="button" onclick="removeAttendanceData()">Download Attendance Record</button>
+      <div class="register-buttons action-buttons">
+        <button class="button downloadReg" onclick="exportData()">Download Attendance Record</button>
+        <button class="button eraseReg" onclick="removeAttendanceData()">Erase Attendance Record</button>
+      </div>
     </table>
 
     <script>
   const container = document.querySelector("#insertEntry");
   const attendanceData = JSON.parse(localStorage.getItem("attendanceRegister")) || [];
 
-  console.log(attendanceData)
   const todayDate = new Date().toISOString().split('T')[0];
   
   document.getElementById("today").innerText = todayDate;
@@ -48,7 +57,7 @@
     deptTd.textContent = emp.department;
 
     const idTd = document.createElement("td");
-    idTd.textContent = emp.id;
+    idTd.textContent = emp.Id;
 
     const inTd = document.createElement("td");
     inTd.textContent = emp.clockIn;
@@ -56,7 +65,7 @@
     const outTd = document.createElement("td");
     outTd.textContent = emp.clockOut || "—";
 
-    row.append(nameTd, deptTd, idTd, inTd, outTd);
+    row.append(nameTd, deptTd,  inTd, outTd);
     container.appendChild(row);
   });
 
@@ -83,9 +92,14 @@
     
     function removeAttendanceData(){
         // bc localStorage wont clear itself
-        
-        localStorage.removeItem("attendanceRegister")
-        alert("Data cleared! Refresh to continue")
+        const note = confirm("Are you sure?")
+        if(note){
+          const exported = confirm("Please ensure that the data has been exported before continuing")
+          if(!exported){
+            exportData()
+          }else{localStorage.removeItem("attendanceRegister")
+        alert("Data cleared! Refresh to continue")}
+        }
     }
 </script>
   </body>
