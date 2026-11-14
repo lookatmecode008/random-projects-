@@ -10,9 +10,11 @@ let employeeDatabase = [];
 // this app waits for this fucntion run completely before continuing since the CSV mcut load before attendance can be checked.
 // we have to wait for the file to be fetched completely first, then wait for its content to be read as text in order for it to be useable. 
 
-// JSemployeeDatabase returns the value we want, but it does not populate the emplyeeDatabase variable outside the scope of then().
-// Line 31 pushes the content out of then() to the database but it isnt seen as an array bc the index value returns undefined, check the values of console.log of lines 30 and 39.
-// Chat says its a timing problem, not a pupulation problem
+//findRecord() can now access the database but naming cnventions have chnaged so some values are inaccessible
+//clockIn button is diabled, logic needs to be evaluated and adjusted
+// maybe its a logic issue, maybe a timing problem where clockIn judges before findRecord(), maybe the key-value pairs fucked up the clockIn logic
+//watch out for name conveentions, all key and values are written in sentence case
+
 fetch("./listOfEmployees.csv")
   .then(response => response.text())
   .then((data) => {
