@@ -91,7 +91,6 @@ function updateButtonsAndStatus(employeeId) {
 }
 
 function findRecord() {
-  // currenly cannot access the database to check employee records, intergration of the async and this find() are our next step. !!OVER!!
   const employeeId = employeeIdInput.value.trim();
   const foundEmployee = employeeDatabase.find(
     (record) => record.Id === employeeId,
