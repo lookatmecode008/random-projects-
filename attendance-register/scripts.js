@@ -5,32 +5,40 @@ const employeeIdInput = document.getElementById("employee-id");
 var employeeNameOutput = document.querySelector(".identity-name");
 var employeeDepartmentOutput = document.querySelector(".identity-message");
 
+
 let employeeDatabase = [];
+// this app waits for this fucntion run completely before continuing since the CSV mcut load before attendance can be checked.
+// we have to wait for the file to be fetched completely first, then wait for its content to be read as text in order for it to be useable. 
 
-startApp()
-// this app waits for this fucntion run completely before continuing since the CSV mcut load before attendance can be checked. !!LINE 13!!
-function startApp() {
-  // we have to wait for the file to be fetched completely first, then wait for its content to be read as text in order for it to be useable. !!LINE 85!!
-  const response = fetch("./listOfEmployees.csv");
-  const data = response
-    .text()
-    .then((data) => {
-      const rows = data.split(/\r?\n/);
-      const headers = rows.shift().split(";");
+// JSemployeeDatabase returns the value we want, but it does not populate the emplyeeDatabase variable outside the scope of then().
+// Line 31 pushes the content out of then() to the database but it isnt seen as an array bc the index value returns undefined, check the values of console.log of lines 30 and 39.
+// Chat says its a timing problem, not a pupulation problem
+fetch("./listOfEmployees.csv")
+.then(response => response.text())
+.then((data) => {
+  const rows = data.split(/\r?\n/);
+  const headers = rows.shift().split(";");
 
-      employeeDatabase = rows.map((row) => {
-        const values = row.split(";");
-        return Object.fromEntries(
-          headers.map((header, index) => [
-            header.trim(),
-            values[index]?.trim() ?? "",
-          ]),
-        );
-      });
+  JSemployeeDatabase = rows.map((row) => {
+      const values = row.split(";");
+      return Object.fromEntries(
+        headers.map((header, index) => [
+          header.trim(),
+          values[index]?.trim() ?? "",
+        ]),
+      );
+      
+    });
+     console.log(JSemployeeDatabase)
+    JSemployeeDatabase.forEach(row => {
+      employeeDatabase.push(row);
+    });
     
   })
     .catch((error) => console.error(error));
-}console.log(employeeDatabase)
+
+  console.log(employeeDatabase)
+
 
 let currentEmployee = null;
 let attendanceRegistry =
@@ -86,7 +94,7 @@ function findRecord() {
   // currenly cannot access the database to check employee records, intergration of the async and this find() are our next step. !!OVER!!
   const employeeId = employeeIdInput.value.trim();
   const foundEmployee = employeeDatabase.find(
-    (record) => record.id === employeeId,
+    (record) => record.Id === employeeId,
   );
 
   if (foundEmployee) {
@@ -160,8 +168,8 @@ clockInButton.addEventListener("click", clockIn);
 clockOutButton.addEventListener("click", clockOut);
 
 // If you type a new ID, re-check status
-employeeIdInput.addEventListener("input", () => {
-  if (employeeIdInput.value.trim().length === 5) {
-    findRecord();
-  }
-});
+// employeeIdInput.addEventListener("input", () => {
+//   if (employeeIdInput.value.trim().length === 5) {
+//     findRecord();
+//   }
+// });
