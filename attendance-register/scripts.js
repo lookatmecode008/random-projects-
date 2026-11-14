@@ -14,31 +14,21 @@ let employeeDatabase = [];
 // Line 31 pushes the content out of then() to the database but it isnt seen as an array bc the index value returns undefined, check the values of console.log of lines 30 and 39.
 // Chat says its a timing problem, not a pupulation problem
 fetch("./listOfEmployees.csv")
-.then(response => response.text())
-.then((data) => {
-  const rows = data.split(/\r?\n/);
-  const headers = rows.shift().split(";");
-
-  JSemployeeDatabase = rows.map((row) => {
-      const values = row.split(";");
-      return Object.fromEntries(
-        headers.map((header, index) => [
-          header.trim(),
-          values[index]?.trim() ?? "",
-        ]),
-      );
-      
-    });
-     console.log(JSemployeeDatabase)
-    JSemployeeDatabase.forEach(row => {
-      employeeDatabase.push(row);
-    });
+  .then(response => response.text())
+  .then((data) => {
+      const rows = data.split(/\r?\n/);
+      const headers = rows.shift().split(";");
+      return employeeDatabase = rows.map((row) => {
+          const values = row.split(";");
+          return Object.fromEntries(
+            headers.map((header, index) => [
+              header.trim(),
+              values[index]?.trim() ?? "",
+            ]))});
+        findRecord()          // atp, the database has ben loaded and read
+      })
     
-  })
     .catch((error) => console.error(error));
-
-  console.log(employeeDatabase)
-
 
 let currentEmployee = null;
 let attendanceRegistry =
@@ -90,7 +80,9 @@ function updateButtonsAndStatus(employeeId) {
   return status;
 }
 
+
 function findRecord() {
+   //console.log(employeeDatabase)
   const employeeId = employeeIdInput.value.trim();
   const foundEmployee = employeeDatabase.find(
     (record) => record.Id === employeeId,
@@ -98,8 +90,8 @@ function findRecord() {
 
   if (foundEmployee) {
     currentEmployee = foundEmployee;
-    employeeNameOutput.textContent = `Name: ${foundEmployee.name} ${foundEmployee.surname}`;
-    employeeDepartmentOutput.textContent = `Department: ${foundEmployee.department}`;
+    employeeNameOutput.textContent = `Name: ${foundEmployee.Name}`;
+    employeeDepartmentOutput.textContent = `Department: ${foundEmployee.Department}`;
     document.querySelector(".state-title").textContent =
       "Employee Record Found";
 
@@ -123,10 +115,9 @@ function clockIn() {
   }
 
   attendanceRegistry.push({
-    id: currentEmployee.id,
-    name: currentEmployee.name,
-    surname: currentEmployee.surname,
-    department: currentEmployee.department,
+    id: currentEmployee.Id,
+    name: currentEmployee.Name,
+    department: currentEmployee.Department,
     date: getToday(),
     clockIn: new Date().toLocaleTimeString(),
     clockOut: null,
