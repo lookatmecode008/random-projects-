@@ -7,11 +7,12 @@ var employeeDepartmentOutput = document.querySelector(".identity-message");
 
 let employeeDatabase = [];
 
+startApp()
 // this app waits for this fucntion run completely before continuing since the CSV mcut load before attendance can be checked. !!LINE 13!!
-async function startApp() {
+function startApp() {
   // we have to wait for the file to be fetched completely first, then wait for its content to be read as text in order for it to be useable. !!LINE 85!!
-  const response = await fetch("./listOfEmployees.csv");
-  const data = await response
+  const response = fetch("./listOfEmployees.csv");
+  const data = response
     .text()
     .then((data) => {
       const rows = data.split(/\r?\n/);
@@ -26,9 +27,10 @@ async function startApp() {
           ]),
         );
       });
-    })
+    
+  })
     .catch((error) => console.error(error));
-}
+}console.log(employeeDatabase)
 
 let currentEmployee = null;
 let attendanceRegistry =
