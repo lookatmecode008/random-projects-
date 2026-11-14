@@ -27,6 +27,8 @@
     <script>
   const container = document.querySelector("#insertEntry");
   const attendanceData = JSON.parse(localStorage.getItem("attendanceRegister")) || [];
+
+  console.log(attendanceData)
   const todayDate = new Date().toISOString().split('T')[0];
   
   document.getElementById("today").innerText = todayDate;

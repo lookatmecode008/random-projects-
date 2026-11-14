@@ -14,6 +14,8 @@ let employeeDatabase = [];
 //clockIn button is diabled, logic needs to be evaluated and adjusted
 // maybe its a logic issue, maybe a timing problem where clockIn judges before findRecord(), maybe the key-value pairs fucked up the clockIn logic
 //watch out for name conveentions, all key and values are written in sentence case
+//entries are now recorded twice in the attendance registry for some reason 
+//clockOut logic is out the window
 
 fetch("./listOfEmployees.csv")
   .then(response => response.text())
@@ -46,12 +48,12 @@ function getClockStatus(employeeId) {
 
   // 1. Is there an open record for TODAY? (clocked in, not out)
   const openToday = attendanceRegistry.find(
-    (r) => r.id === employeeId && r.date === today && r.clockOut === null,
+    (r) => r.Id === employeeId && r.date === today && r.clockOut === null,
   );
 
   // 2. Is there a closed record for TODAY? (already finished today)
   const closedToday = attendanceRegistry.find(
-    (r) => r.id === employeeId && r.date === today && r.clockOut !== null,
+    (r) => r.Id === employeeId && r.date === today && r.clockOut !== null,
   );
 
   if (openToday) {
@@ -63,7 +65,7 @@ function getClockStatus(employeeId) {
     };
   }
   if (closedToday) {
-    // Already did a full shift today
+    // Already dId a full shift today
     return {
       canIn: false,
       canOut: false,
@@ -97,8 +99,8 @@ function findRecord() {
     document.querySelector(".state-title").textContent =
       "Employee Record Found";
 
-    updateButtonsAndStatus(foundEmployee.id);
-    localStorage.setItem("foundID", JSON.stringify(foundEmployee.id));
+    updateButtonsAndStatus(foundEmployee.Id);
+    localStorage.setItem("foundID", JSON.stringify(foundEmployee.Id));
     return foundEmployee;
   } else {
     alert("Employee record not found.");
@@ -110,14 +112,14 @@ function clockIn() {
   if (!currentEmployee) currentEmployee = findRecord();
   if (!currentEmployee) return;
 
-  const status = getClockStatus(currentEmployee.id);
+  const status = getClockStatus(currentEmployee.Id);
   if (!status.canIn) {
     alert(status.message);
     return;
   }
 
   attendanceRegistry.push({
-    id: currentEmployee.Id,
+    Id: currentEmployee.Id,
     name: currentEmployee.Name,
     department: currentEmployee.Department,
     date: getToday(),
@@ -129,7 +131,7 @@ function clockIn() {
     "attendanceRegister",
     JSON.stringify(attendanceRegistry),
   );
-  updateButtonsAndStatus(currentEmployee.id);
+  updateButtonsAndStatus(currentEmployee.Id);
 }
 
 function clockOut() {
@@ -139,7 +141,7 @@ function clockOut() {
   // find() the open record for TODAY to close it
   const recordToClose = attendanceRegistry.find(
     (r) =>
-      r.id === currentEmployee.id && r.date === today && r.clockOut === null,
+      r.Id === currentEmployee.Id && r.date === today && r.clockOut === null,
   );
 
   if (!recordToClose) {
@@ -152,7 +154,7 @@ function clockOut() {
     "attendanceRegister",
     JSON.stringify(attendanceRegistry),
   );
-  updateButtonsAndStatus(currentEmployee.id);
+  updateButtonsAndStatus(currentEmployee.Id);
 }
 
 findRecordButton.addEventListener("click", findRecord);
