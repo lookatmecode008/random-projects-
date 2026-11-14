@@ -56,6 +56,34 @@
     row.append(nameTd, deptTd, idTd, inTd, outTd);
     container.appendChild(row);
   });
+
+
+  function exportData(){
+      //bc localStorage doesnt store persistent data across devices
+     
+    const dataForExport = JSON.stringify(attendanceData)
+    const exportFile = new Blob (
+         [dataForExport], 
+        {type:"text/csv"})
+        
+    const downloadURL = URL.createObjectURL(exportFile);
+
+    const downloadLink = document.createElement("a");
+
+    downloadLink.href = downloadURL;
+    downloadLink.download = "attendance-backup.json";
+
+    downloadLink.click();
+
+    URL.revokeObjectURL(downloadURL);
+    }
+    
+    function removeAttendanceData(){
+        // bc localStorage wont clear itself
+        
+        localStorage.removeItem("attendanceRegister")
+        alert("Data cleared! Refresh to continue")
+    }
 </script>
   </body>
 </html>
