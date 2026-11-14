@@ -5,16 +5,17 @@ const employeeIdInput = document.getElementById("employee-id");
 var employeeNameOutput = document.querySelector(".identity-name");
 var employeeDepartmentOutput = document.querySelector(".identity-message");
 
-const employeeDatabase = [
-  { id: "00124", name: "Katleho", surname: "Faku", department: "Media" },
-  { id: "00125", name: "Mohau", surname: "Zen", department: "IT" },
-  { id: "00126", name: "Aaron", surname: "Pule", department: "Finance" },
-  { id: "00127", name: "Lerato", surname: "Senne", department: "HR" },
-  { id: "00128", name: "Portia", surname: "Tiny", department: "Marketing" },
-  { id: "00129", name: "Thabo", surname: "Moko", department: "Operations" },
-  { id: "00130", name: "Naledi", surname: "Molefe", department: "Sales" },
-  { id: "00131", name: "Sipho", surname: "Dlamini", department: "Manager" },
-];
+fetch("./listOfEmployees.csv")
+  .then(response =>response.text())
+  .then(data =>{
+  const rows = data.split("\n");
+  const headers = rows[0].split(";")
+  const headerPairs = headers.map((header,index)=>{return [header, rows [index]]})
+  console.log(headerPairs)})
+  .catch(error =>console.error(error))
+
+
+const employeeDatabase = [];
 
 let currentEmployee = null;
 let attendanceRegistry = JSON.parse(localStorage.getItem("attendanceRegister")) || [];
