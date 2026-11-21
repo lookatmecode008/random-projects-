@@ -7,7 +7,7 @@
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#20242c",
-  "icon": [
+  "icons": [
     {
         "src":"./Logo Zoom.png",
         "sizes":"512x512",
