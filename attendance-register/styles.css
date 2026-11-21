@@ -481,13 +481,6 @@ input[type="text"]:focus-visible {
   margin: 0.3rem;
 
 }
-
-.day-record{
-  border: solid 0.1px grey;
-  border-radius: 5%;
-  padding: 1rem;
-  margin-top: 1rem;
-}
 #register-body img{
   max-width: 20%;
 }

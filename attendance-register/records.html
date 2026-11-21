@@ -17,6 +17,7 @@
           
       </header>
 <div class="day-record brand-copy">
+    <h2>Today: <span id="today"></span></h2>
     <table>
       <thead>
         <tr>
@@ -43,11 +44,12 @@
 
   // Clear container
   container.innerHTML = "";
- let currentDate="";
+
+  // This is where you use textContent to dictate what element goes where
+attendanceData.sort((a, b) => a.date.localeCompare(b.date));
   
- // This is where you use textContent to dictate what element goes where
-  attendanceData.sort((a, b) => a.date.localeCompare(b.date));
-  
+  let currentDate="";
+
   attendanceData.forEach((emp) => {
       if (emp.date !== currentDate) {
     currentDate = emp.date;
