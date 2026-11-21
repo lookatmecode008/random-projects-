@@ -1,3 +1,16 @@
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./service-worker.js")
+        .then((registration) => {
+          console.log("PWA registered:", registration.scope);
+        })
+        .catch((error) => {
+          console.error("PWA registration failed:", error);
+        });
+    });
+  }
+
+
 const findRecordButton = document.getElementById("find-record");
 const clockInButton = document.getElementById("clock-in");
 const clockOutButton = document.getElementById("clock-out");
