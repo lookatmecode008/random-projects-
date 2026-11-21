@@ -474,7 +474,7 @@ input[type="text"]:focus-visible {
   font-size: 0.7rem;
 }
 
-/* ATTENDANCE REGISTER STYLING */
+/* ATTENDANCE REGISTER STYLING *********************************************************************/
 
 #register-body{
   background-color: var(--amber-pale);
@@ -482,6 +482,12 @@ input[type="text"]:focus-visible {
 
 }
 
+.day-record{
+  border: solid 0.1px grey;
+  border-radius: 5%;
+  padding: 1rem;
+  margin-top: 1rem;
+}
 #register-body img{
   max-width: 20%;
 }
@@ -533,7 +539,7 @@ td {
 
 
 
-/* Wider screens get more breathing room; the mobile layout is the default. */
+/* Bigger screens adjestments ***********************************************************************/
 @media (min-width: 520px) {
   .topbar {
     padding: 17px 25px;

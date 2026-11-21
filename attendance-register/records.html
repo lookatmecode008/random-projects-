@@ -9,7 +9,6 @@
   
   <body class="app-shell">
       <header class="topbar records-header">
-     
             <img src="./Logo Zoom.jpeg"/>
             <div class="brand-copy">
               <span class="brand-name">Are Aganeng NPO</span>
@@ -17,8 +16,7 @@
             </div>
           
       </header>
-
-    <h2>Today: <span id="today"></span></h2>
+<div class="day-record brand-copy">
     <table>
       <thead>
         <tr>
@@ -34,7 +32,7 @@
         <button class="button eraseReg" onclick="removeAttendanceData()">Erase Attendance Record</button>
       </div>
     </table>
-
+</div>
     <script>
   const container = document.querySelector("#insertEntry");
   const attendanceData = JSON.parse(localStorage.getItem("attendanceRegister")) || [];
@@ -45,9 +43,24 @@
 
   // Clear container
   container.innerHTML = "";
-
-  // This is where you use textContent to dictate what element goes where
+ let currentDate="";
+  
+ // This is where you use textContent to dictate what element goes where
+  attendanceData.sort((a, b) => a.date.localeCompare(b.date));
+  
   attendanceData.forEach((emp) => {
+      if (emp.date !== currentDate) {
+    currentDate = emp.date;
+
+    const dateRow = document.createElement("tr");
+    const dateTd = document.createElement("td");
+
+    dateTd.textContent = currentDate;
+    dateTd.colSpan = 4;
+
+    dateRow.appendChild(dateTd);
+    container.appendChild(dateRow);
+  }
     const row = document.createElement("tr");
 
     const nameTd = document.createElement("td");
