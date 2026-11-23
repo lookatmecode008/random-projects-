@@ -3,10 +3,10 @@ const CACHE_NAME = "attapp-v1";
 
 const APP_FILES = [
   "./index.html",
-  "./record.html",
+  "./records.html",
   "./styles.css",
   "./scripts.js",
-  "./employees.csv",
+  "./listOfEmployees.csv",
   "./Logo Zoom(1).png",
   "./Logo Zoom.png"
 ];
@@ -64,7 +64,7 @@ self.addEventListener("fetch", (event) => {
   }
 
   // Fetch fresh employee data when possible
-  if (request.url.endsWith("/employees.csv")) {
+  if (request.url.endsWith("/listOfEmployees.csv")) {
     event.respondWith(
       fetch(request)
         .then((response) => {
