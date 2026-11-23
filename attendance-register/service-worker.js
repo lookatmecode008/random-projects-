@@ -1,6 +1,7 @@
 
-const CACHE_NAME = "attapp-v1";
+const CACHE_NAME = "attapp-v2";
 
+console.log(`Runngin version: ${CACHE_NAME} using the files: ${APP_FILES}`)
 const APP_FILES = [
   "./index.html",
   "./records.html",
@@ -8,7 +9,8 @@ const APP_FILES = [
   "./scripts.js",
   "./listOfEmployees.csv",
   "./Logo Zoom(1).png",
-  "./Logo Zoom.png"
+  "./Logo Zoom.png",
+  "./manifest.json",
 ];
 
 // Install: save the application files
