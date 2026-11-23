@@ -9,6 +9,7 @@ const APP_FILES = [
   "./listOfEmployees.csv",
   "./Logo Zoom(1).png",
   "./Logo Zoom.png",
+  "./Logo Zoom.jpeg",
   "./manifest.json",
 ];
 
