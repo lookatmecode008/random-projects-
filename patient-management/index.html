@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DistrictCare | Patient Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="topbar">
+        <div>
+            <p class="eyebrow">DISTRICT HEALTH SERVICES</p>
+            <h1>DistrictCare</h1>
+        </div>
+        <span class="user-label">Demo staff account</span>
+    </header>
+
+    <main class="container">
+        <section class="page-heading">
+            <div>
+                <p class="eyebrow">OVERVIEW</p>
+                <h2>Patient dashboard</h2>
+                <p class="muted">A small frontend demo using sample data only.</p>
+            </div>
+            <button id="show-form-button" class="primary-button">+ Register patient</button>
+        </section>
+
+        <section class="stats" aria-label="Patient statistics">
+            <article class="stat-card">
+                <p class="muted">Total patients</p>
+                <p id="total-patients" class="stat-number">0</p>
+            </article>
+            <article class="stat-card">
+                <p class="muted">Registered today</p>
+                <p id="today-patients" class="stat-number">0</p>
+            </article>
+            <article class="stat-card">
+                <p class="muted">Facilities</p>
+                <p class="stat-number">5</p>
+            </article>
+        </section>
+
+        <section class="panel">
+            <div class="panel-heading">
+                <div>
+                    <h3>Patient register</h3>
+                    <p class="muted">Search the sample patients below.</p>
+                </div>
+                <label class="search-label" for="search-input">Search patients</label>
+                <input id="search-input" type="search" placeholder="Name or patient number">
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Patient number</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Facility</th>
+                        </tr>
+                    </thead>
+                    <tbody id="patient-table-body">
+                        <!-- JavaScript inserts patient rows here. -->
+                    </tbody>
+                </table>
+            </div>
+            <p id="empty-message" class="empty-message" hidden>No matching patients found.</p>
+        </section>
+
+        <section id="register-panel" class="panel form-panel" hidden>
+            <div class="panel-heading">
+                <div>
+                    <h3>Register a patient</h3>
+                    <p class="muted">This adds a record to this browser session only.</p>
+                </div>
+            </div>
+
+            <form id="patient-form">
+                <div class="form-grid">
+                    <label>
+                        First name
+                        <input id="first-name" name="firstName" required maxlength="60">
+                    </label>
+                    <label>
+                        Last name
+                        <input id="last-name" name="lastName" required maxlength="60">
+                    </label>
+                    <label>
+                        Age
+                        <input id="age" name="age" type="number" min="0" max="120" required>
+                    </label>
+                    <label>
+                        Facility
+                        <select id="facility" name="facility" required>
+                            <option value="">Choose a facility</option>
+                            <option>District Hospital</option>
+                            <option>Clinic A</option>
+                            <option>Clinic B</option>
+                            <option>Clinic C</option>
+                            <option>Referral Services</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="cancel-button" class="secondary-button">Cancel</button>
+                    <button type="submit" class="primary-button">Save patient</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        Learning prototype · Do not enter real patient information.
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
